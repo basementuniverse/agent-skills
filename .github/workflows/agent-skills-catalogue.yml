@@ -1,0 +1,162 @@
+name: Deploy package skills into catalogue
+
+on:
+  workflow_call:
+    inputs:
+      scope:
+        description: Package scope used under skills/packages/{scope}
+        required: true
+        type: string
+    secrets:
+      AGENT_SKILLS_TOKEN:
+        description: Token with push/PR permissions on basementuniverse/agent-skills
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      TARGET_REPO: basementuniverse/agent-skills
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate trigger and collect metadata
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${GITHUB_REF_TYPE:-}" != "tag" ]]; then
+            echo "This workflow must run from a tag push." >&2
+            exit 1
+          fi
+
+          TAG="${GITHUB_REF_NAME}"
+          if [[ "$TAG" != *-skills ]]; then
+            echo "Tag '$TAG' does not end with '-skills'." >&2
+            exit 1
+          fi
+
+          # Enforce that the tagged commit is on main.
+          git fetch origin main --depth=1
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" "origin/main"; then
+            echo "Tagged commit is not reachable from origin/main." >&2
+            exit 1
+          fi
+
+          if [[ ! -d skills ]]; then
+            echo "Source repository has no skills/ directory." >&2
+            exit 1
+          fi
+
+          PACKAGE_VERSION=""
+          if [[ -f package.json ]]; then
+            PACKAGE_VERSION="$(jq -r '.version // ""' package.json)"
+          fi
+
+          SCOPE="${{ inputs.scope }}"
+          SAFE_TAG="${TAG//\//-}"
+          BRANCH="chore/skills-${SCOPE}-${SAFE_TAG}-${GITHUB_RUN_ID}"
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "scope=$SCOPE" >> "$GITHUB_OUTPUT"
+          echo "package_version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout catalogue repository
+        uses: actions/checkout@v4
+        with:
+          repository: basementuniverse/agent-skills
+          ref: main
+          token: ${{ secrets.AGENT_SKILLS_TOKEN }}
+          path: catalogue
+          fetch-depth: 0
+
+      - name: Sync skills and create manifest
+        id: sync
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          DEST_DIR="catalogue/skills/packages/${{ steps.meta.outputs.scope }}"
+          mkdir -p "catalogue/skills/packages"
+          rm -rf "$DEST_DIR"
+          mkdir -p "$DEST_DIR"
+
+          # Copy source skills/* into skills/packages/{scope}/...
+          rsync -a --delete skills/ "$DEST_DIR/"
+
+          jq -n \
+            --arg sourceRepository "${GITHUB_REPOSITORY}" \
+            --arg sourceRef "${{ steps.meta.outputs.tag }}" \
+            --arg sourceCommit "${GITHUB_SHA}" \
+            --arg package "${{ steps.meta.outputs.scope }}" \
+            --arg packageVersion "${{ steps.meta.outputs.package_version }}" \
+            '{
+              sourceRepository: $sourceRepository,
+              sourceRef: $sourceRef,
+              sourceCommit: $sourceCommit,
+              package: $package,
+              packageVersion: $packageVersion
+            }' > "$DEST_DIR/manifest.json"
+
+          cd catalogue
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add "skills/packages/${{ steps.meta.outputs.scope }}"
+
+          if git diff --cached --quiet; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push branch
+        if: steps.sync.outputs.has_changes == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd catalogue
+
+          BRANCH="${{ steps.meta.outputs.branch }}"
+          git switch -c "$BRANCH"
+          git commit -m "chore(skills): update ${{ steps.meta.outputs.scope }} from ${{ github.repository }}@${{ steps.meta.outputs.tag }}"
+          git push --set-upstream origin "$BRANCH"
+
+      - name: Open pull request
+        if: steps.sync.outputs.has_changes == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.AGENT_SKILLS_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          BRANCH="${{ steps.meta.outputs.branch }}"
+          SCOPE="${{ steps.meta.outputs.scope }}"
+          TAG="${{ steps.meta.outputs.tag }}"
+
+          PR_BODY="$(printf '%s\n' \
+            '## Summary' \
+            '' \
+            "- sync skills/ from ${{ github.repository }}" \
+            "- source ref: $TAG" \
+            "- source commit: ${{ github.sha }}" \
+            "- scope: $SCOPE" \
+            '' \
+            'This PR was generated automatically by the skills deployment workflow.'
+          )"
+
+          gh pr create \
+            --repo "$TARGET_REPO" \
+            --base main \
+            --head "$BRANCH" \
+            --title "Update skills for $SCOPE ($TAG)" \
+            --body "$PR_BODY"
+
+      - name: No changes notice
+        if: steps.sync.outputs.has_changes != 'true'
+        run: echo "No catalogue changes detected; skipping PR creation."
