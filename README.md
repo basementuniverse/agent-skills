@@ -12,10 +12,16 @@ Skills can be searched using:
 gh skill search "search term or package name" --owner basementuniverse
 ```
 
-Skills can be installed into your project using:
+They can be installed into your project using:
 
 ```bash
 gh skill install "skill name" --owner basementuniverse
+```
+
+Or selected interactively using:
+
+```bash
+gh skill install basementuniverse/agent-skills
 ```
 
 See [gh skill](https://cli.github.com/manual/gh_skill) for more information.
