@@ -1,24 +1,18 @@
 # basementuniverse/agent-skills
 
-This repository is a central catalogue of skills for effectively using basementuniverse game components and other libraries in your projects.
+This repository is a central catalogue of skills for effectively using basementuniverse game components and libraries in your projects.
 
-## Overview
-
-Within the `/skills` directory, we have 2 collections:
-
-1. `/skills/packages` - a collection of skills for using basementuniverse packages and libraries. Don't modify these directly! They are maintained in their respective package repositories and automatically deployed to this catalogue via CI scripts.
-
-2. `/skills/misc` - any other skills that are not tied to a specific package. These can be authored and maintained directly in this repository.
+Skills should not be modified directly in this repository. Instead, they should be authored in the package repository and deployed to this catalogue using a CI script.
 
 ## Discovering and provisioning skills
 
-Skills in this catalogue can be searched using:
+Skills can be searched using:
 
 ```bash
 gh skill search "search term or package name" --owner basementuniverse
 ```
 
-Skills in this catalogue can be installed into your project using:
+Skills can be installed into your project using:
 
 ```bash
 gh skill install "skill name" --owner basementuniverse
@@ -30,7 +24,7 @@ See [gh skill](https://cli.github.com/manual/gh_skill) for more information.
 
 ### Overview
 
-1. Go to the package repository...
+1. Go to the package repository
 1. Create the directory structure and author the skill
 2. Set up a CI script to deploy the skill to this catalogue
 
@@ -90,7 +84,7 @@ Create a Github secret called `AGENT_SKILLS_TOKEN` and paste in the token.
 
 ## Deploying a skill to the catalogue
 
-The CI script is set up to open a PR in this central catalogue repository, adding the package's skill contents to `/skills/packages/{package name}/...`.
+The CI script is set up to open a PR in this central catalogue repository, adding the package's skills to `/skills`.
 
 This CI pipeline will run when pushing changes to the `main` branch with a tag containing the semver and a `-skills` suffix. The PR must be approved and merged (in *this* repository) before the skill is available in the catalogue.
 

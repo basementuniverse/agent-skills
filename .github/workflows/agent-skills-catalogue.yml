@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       scope:
-        description: Package scope used under skills/packages/{scope}
+        description: Package scope used for manifests/{scope}.json
         required: true
         type: string
     secrets:
@@ -81,13 +81,31 @@ jobs:
         run: |
           set -euo pipefail
 
-          DEST_DIR="catalogue/skills/packages/${{ steps.meta.outputs.scope }}"
-          mkdir -p "catalogue/skills/packages"
-          rm -rf "$DEST_DIR"
-          mkdir -p "$DEST_DIR"
+          DEST_SKILLS_DIR="catalogue/skills"
+          MANIFEST_DIR="catalogue/manifests"
+          MANIFEST_PATH="$MANIFEST_DIR/${{ steps.meta.outputs.scope }}.json"
 
-          # Copy source skills/* into skills/packages/{scope}/...
-          rsync -a --delete skills/ "$DEST_DIR/"
+          mkdir -p "$DEST_SKILLS_DIR" "$MANIFEST_DIR"
+
+          mapfile -t SKILLS < <(find skills -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort)
+
+          if [[ -f "$MANIFEST_PATH" ]]; then
+            mapfile -t PREV_SKILLS < <(jq -r '.skills[]? // empty' "$MANIFEST_PATH")
+            for skill in "${PREV_SKILLS[@]}"; do
+              rm -rf "$DEST_SKILLS_DIR/$skill"
+            done
+          fi
+
+          for skill in "${SKILLS[@]}"; do
+            rm -rf "$DEST_SKILLS_DIR/$skill"
+            rsync -a "skills/$skill/" "$DEST_SKILLS_DIR/$skill/"
+          done
+
+          if [[ ${#SKILLS[@]} -eq 0 ]]; then
+            SKILLS_JSON='[]'
+          else
+            SKILLS_JSON="$(printf '%s\n' "${SKILLS[@]}" | jq -R . | jq -s .)"
+          fi
 
           jq -n \
             --arg sourceRepository "${GITHUB_REPOSITORY}" \
@@ -95,19 +113,21 @@ jobs:
             --arg sourceCommit "${GITHUB_SHA}" \
             --arg package "${{ steps.meta.outputs.scope }}" \
             --arg packageVersion "${{ steps.meta.outputs.package_version }}" \
+            --argjson skills "$SKILLS_JSON" \
             '{
               sourceRepository: $sourceRepository,
               sourceRef: $sourceRef,
               sourceCommit: $sourceCommit,
               package: $package,
-              packageVersion: $packageVersion
-            }' > "$DEST_DIR/manifest.json"
+              packageVersion: $packageVersion,
+              skills: $skills
+            }' > "$MANIFEST_PATH"
 
           cd catalogue
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add "skills/packages/${{ steps.meta.outputs.scope }}"
+          git add -A skills "$MANIFEST_PATH"
 
           if git diff --cached --quiet; then
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
@@ -146,6 +166,7 @@ jobs:
             "- source ref: $TAG" \
             "- source commit: ${{ github.sha }}" \
             "- scope: $SCOPE" \
+            "- manifest: manifests/$SCOPE.json" \
             '' \
             'This PR was generated automatically by the skills deployment workflow.'
           )"
