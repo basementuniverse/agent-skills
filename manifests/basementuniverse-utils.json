@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/utils",
+  "sourceRef": "v1.8.1-skills",
+  "sourceCommit": "9f1f4bebea04e17108db41ad8945af5743cac089",
+  "package": "basementuniverse-utils",
+  "packageVersion": "1.8.1",
+  "skills": [
+    "basementuniverse-utils"
+  ]
+}
