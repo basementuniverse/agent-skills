@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/intersection-helpers",
+  "sourceRef": "v0.5.1-skills",
+  "sourceCommit": "869238e3b4f41d24fb1c9dd1c7dbbd88bada2cdc",
+  "package": "intersection-helpers",
+  "packageVersion": "0.5.1",
+  "skills": [
+    "basementuniverse-intersection-helpers"
+  ]
+}
