@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/vec",
+  "sourceRef": "v2.5.1-skills",
+  "sourceCommit": "77e4592330049669869d6b3edb57e4d226bf8b75",
+  "package": "basementuniverse-vec",
+  "packageVersion": "2.5.1",
+  "skills": [
+    "basementuniverse-vec"
+  ]
+}
