@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/canvas-helpers",
+  "sourceRef": "v1.6.0-skills",
+  "sourceCommit": "253dd1e97eab245d47d645ca4c36964147ed8c99",
+  "package": "basementuniverse-canvas-helpers",
+  "packageVersion": "1.6.0",
+  "skills": [
+    "basementuniverse-canvas-helpers"
+  ]
+}
