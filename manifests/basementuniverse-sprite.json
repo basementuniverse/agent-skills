@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/sprite",
+  "sourceRef": "v1.3.1-skills",
+  "sourceCommit": "79982ba2875fa4a3f03523478aef5c7e3c4e0038",
+  "package": "basementuniverse-sprite",
+  "packageVersion": "1.3.1",
+  "skills": [
+    "basementuniverse-sprite"
+  ]
+}
