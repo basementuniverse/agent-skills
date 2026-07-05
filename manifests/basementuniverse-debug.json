@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/debug",
+  "sourceRef": "v1.4.2-skills",
+  "sourceCommit": "6bcd969e6e03e55e36c17e9d8f32c769a40fd007",
+  "package": "basementuniverse-debug",
+  "packageVersion": "1.4.2",
+  "skills": [
+    "basementuniverse-debug"
+  ]
+}
