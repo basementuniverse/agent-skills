@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/scene-graph",
+  "sourceRef": "v0.0.1-skills",
+  "sourceCommit": "541687ffef5d21987bf9443d8626163401cb9333",
+  "package": "basementuniverse-scene-graph",
+  "packageVersion": "0.0.1",
+  "skills": [
+    "basementuniverse-scene-graph"
+  ]
+}
