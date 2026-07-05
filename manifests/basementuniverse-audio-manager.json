@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/audio-manager",
+  "sourceRef": "v1.1.0-skills",
+  "sourceCommit": "14c9555759036d9b598c454eaed8e6e3baca77a0",
+  "package": "basementuniverse-audio-manager",
+  "packageVersion": "1.1.0",
+  "skills": [
+    "basementuniverse-audio-manager"
+  ]
+}
