@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/layout",
+  "sourceRef": "v1.0.2-skills",
+  "sourceCommit": "1f51d19a73623e55a618208e301c40a2ef8ef6be",
+  "package": "basementuniverse-layout",
+  "packageVersion": "1.0.2",
+  "skills": [
+    "basementuniverse-layout"
+  ]
+}
