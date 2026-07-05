@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/scene-manager",
+  "sourceRef": "v1.4.0-skills",
+  "sourceCommit": "3567f42fe457923c48182686dd2672bb4f367d6c",
+  "package": "basementuniverse-scene-manager",
+  "packageVersion": "1.4.0",
+  "skills": [
+    "basementuniverse-scene-manager"
+  ]
+}
