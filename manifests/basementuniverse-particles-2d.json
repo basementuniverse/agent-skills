@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/particles-2d",
+  "sourceRef": "v1.5.1-skills",
+  "sourceCommit": "2390af6937af19df562a8ef8940d5f270871ba65",
+  "package": "basementuniverse-particles-2d",
+  "packageVersion": "1.5.1",
+  "skills": [
+    "basementuniverse-particles-2d"
+  ]
+}
