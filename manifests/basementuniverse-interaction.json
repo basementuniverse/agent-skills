@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/interaction",
+  "sourceRef": "v1.0.0-skills",
+  "sourceCommit": "2215ac6d49fc0ac1df2416a68ef516045ff5ac14",
+  "package": "basementuniverse-interaction",
+  "packageVersion": "1.0.0",
+  "skills": [
+    "basementuniverse-interaction"
+  ]
+}
