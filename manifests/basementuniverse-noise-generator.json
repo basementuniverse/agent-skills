@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/noise-generator",
+  "sourceRef": "v1.0.0-skills",
+  "sourceCommit": "9dd3a8116bba9d7ea0f053392a2794756f0fa25e",
+  "package": "basementuniverse-noise-generator",
+  "packageVersion": "1.0.0",
+  "skills": [
+    "basementuniverse-noise-generator"
+  ]
+}
