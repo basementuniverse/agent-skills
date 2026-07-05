@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/input-manager",
+  "sourceRef": "v1.5.0-skills",
+  "sourceCommit": "ee5c8ec14f886322510f932a8ecca9083a7f916b",
+  "package": "basementuniverse-input-manager",
+  "packageVersion": "1.5.0",
+  "skills": [
+    "basementuniverse-input-manager"
+  ]
+}
