@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/stopwatch",
+  "sourceRef": "v1.0.1-skills",
+  "sourceCommit": "72286687583a434e21e4816b3e1e40cc375c5c60",
+  "package": "basementuniverse-stopwatch",
+  "packageVersion": "1.0.1",
+  "skills": [
+    "basementuniverse-stopwatch"
+  ]
+}
