@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/tile-map",
+  "sourceRef": "v1.2.1-skills",
+  "sourceCommit": "c2d947e8a00658eadb7e1f2fff8b48df58fb07af",
+  "package": "basementuniverse-tile-map",
+  "packageVersion": "1.2.1",
+  "skills": [
+    "basementuniverse-tile-map"
+  ]
+}
