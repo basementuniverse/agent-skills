@@ -6,22 +6,22 @@ Skills should not be modified directly in this repository. Instead, they should 
 
 ## Discovering and provisioning skills
 
-Skills can be searched using:
+Skills can be selected interactively:
+
+```bash
+gh skill install basementuniverse/agent-skills
+```
+
+They can be searched:
 
 ```bash
 gh skill search "search term or package name" --owner basementuniverse
 ```
 
-They can be installed into your project using:
+They can be installed individually:
 
 ```bash
 gh skill install "skill name" --owner basementuniverse
-```
-
-Or selected interactively using:
-
-```bash
-gh skill install basementuniverse/agent-skills
 ```
 
 See [gh skill](https://cli.github.com/manual/gh_skill) for more information.
