@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/content-manager",
+  "sourceRef": "v2.0.0-skills",
+  "sourceCommit": "ee9734e701ea7ce55d26189315ee317550f8697e",
+  "package": "basementuniverse-content-manager",
+  "packageVersion": "2.0.0",
+  "skills": [
+    "basementuniverse-content-manager"
+  ]
+}
