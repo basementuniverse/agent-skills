@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/camera-3d",
+  "sourceRef": "v1.5.1-skills",
+  "sourceCommit": "0b37051a6567cfee0295fd7955c6ec7b84ed0326",
+  "package": "basementuniverse-camera-3d",
+  "packageVersion": "1.5.1",
+  "skills": [
+    "basementuniverse-camera-3d"
+  ]
+}
