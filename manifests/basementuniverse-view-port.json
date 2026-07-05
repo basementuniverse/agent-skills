@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "basementuniverse/view-port",
+  "sourceRef": "v1.1.0-skills",
+  "sourceCommit": "c5530e790285d4d0e246156b289800547cf04348",
+  "package": "basementuniverse-view-port",
+  "packageVersion": "1.1.0",
+  "skills": [
+    "basementuniverse-view-port"
+  ]
+}
