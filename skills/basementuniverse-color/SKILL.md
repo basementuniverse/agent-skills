@@ -22,6 +22,7 @@ Use this skill when working with `@basementuniverse/color`.
 The package currently exports:
 
 - Types: `RGBAColor`, `HSLAColor`, random option types.
+- Type guards: `isRGBAColor`, `isHSLAColor` (available both as named exports and on `ColorUtils`).
 - `ColorUtils` object containing all runtime helpers.
 
 Preferred usage pattern:
@@ -36,8 +37,8 @@ const css = ColorUtils.hslaToString(c2);
 
 Important:
 
-- README examples may imply individual function exports, but this build exposes runtime helpers through `ColorUtils`.
-- Type guards (`isRGBAColor`, `isHSLAColor`) exist internally but are not part of the exported runtime API.
+- Most runtime helpers are exposed through `ColorUtils` rather than as individual named exports.
+- Type guards (`isRGBAColor`, `isHSLAColor`) are exported both as named exports and on `ColorUtils`.
 
 ## Practical Guidance
 
