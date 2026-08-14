@@ -85,11 +85,9 @@ type RandomGradientOptions = {
 - `invert<T extends RGBAColor | HSLAColor>(color: T): T`
 - `blend<T extends RGBAColor | HSLAColor>(color1: T, color2: T, ratio = 0.5): T`
 
-## Non-exported Internal Helpers
+## Type Guards
 
-The package includes internal runtime type guards:
+The package exports runtime type guards, available both as named exports and on `ColorUtils`:
 
-- `isRGBAColor(...)`
-- `isHSLAColor(...)`
-
-These are not part of the exported runtime API in the current build.
+- `isRGBAColor(color: any): color is RGBAColor`
+- `isHSLAColor(color: any): color is HSLAColor`

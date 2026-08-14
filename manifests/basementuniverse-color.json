@@ -1,9 +1,9 @@
 {
   "sourceRepository": "basementuniverse/color",
-  "sourceRef": "v1.4.0-skills",
-  "sourceCommit": "8cd656e6f5293fa3a1829ae3cdd072f26db284d0",
+  "sourceRef": "v1.5.0-skills",
+  "sourceCommit": "a96fe4984f682491356fcea5c64ae0a70aec66d6",
   "package": "basementuniverse-color",
-  "packageVersion": "1.4.0",
+  "packageVersion": "1.5.0",
   "skills": [
     "basementuniverse-color"
   ]
