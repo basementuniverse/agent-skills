@@ -1,9 +1,9 @@
 {
   "sourceRepository": "basementuniverse/animation",
-  "sourceRef": "v1.4.1-skills",
-  "sourceCommit": "f37cec0d4749de18976f957683b7fee7b99b0e33",
+  "sourceRef": "v1.5.0-skills",
+  "sourceCommit": "62850579f62d75b5c7c8891e79a08fcc711a3f08",
   "package": "basementuniverse-animation",
-  "packageVersion": "1.4.1",
+  "packageVersion": "1.5.0",
   "skills": [
     "basementuniverse-animation"
   ]

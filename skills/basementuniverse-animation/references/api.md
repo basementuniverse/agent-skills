@@ -24,6 +24,22 @@ import {
 } from '@basementuniverse/animation';
 ```
 
+For direct browser usage, load `build/index.js` with a `<script>` tag and use
+the namespaced global:
+
+```html
+<script src="build/index.js"></script>
+<script>
+	const animation = new BasementUniverseAnimation.Animation({
+		initialValue: 0,
+		targetValue: 1,
+	});
+</script>
+```
+
+The UMD build supports CommonJS `require()` and bundlers, but native ESM
+imports require a separate ESM build that this package does not currently ship.
+
 ## Enums
 
 ### AnimationMode
