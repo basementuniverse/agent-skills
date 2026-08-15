@@ -14,6 +14,12 @@ This package animates values over time (numbers, vectors, colors). It does not
 render anything. Consumers use animated values for position, rotation, scale,
 colors, and other gameplay/UI state.
 
+The package publishes a UMD build. In bundlers such as webpack or Vite, use
+named imports from `@basementuniverse/animation`. When loading the build with a
+browser `<script>` tag, use the `BasementUniverseAnimation` global namespace,
+for example `BasementUniverseAnimation.Animation`. The package does not publish
+a separate native ESM build.
+
 ## When to use
 
 Use this skill for:
