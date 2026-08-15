@@ -26,6 +26,7 @@
 - RGBA manipulation converts to HSLA internally (except direct alpha ops and direct RGBA blend/invert behavior).
 - HSLA `invert` converts to RGBA, inverts channels, and converts back.
 - `fadeIn`/`fadeOut` keep color channels and adjust only alpha.
+- `hue` shifts hue in degrees, wrapping around at 360.
 - Manipulation helpers preserve the input color type (`RGBAColor` in -> `RGBAColor` out, likewise for HSLA).
 
 ## Random Generation Contracts
