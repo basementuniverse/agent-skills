@@ -9,6 +9,12 @@ description: >
 
 Use this skill when working with `@basementuniverse/color`.
 
+The package publishes a UMD build. In bundlers such as webpack or Vite, use
+named imports from `@basementuniverse/color`. When loading the build with a
+browser `<script>` tag, use the `BasementUniverseColor` global namespace,
+for example `BasementUniverseColor.ColorUtils`. The package does not publish
+a separate native ESM build.
+
 ## Use This Skill For
 
 - Parsing user-provided color strings into structured RGBA or HSLA values.

@@ -6,6 +6,19 @@ Library import:
 import { ColorUtils, type RGBAColor, type HSLAColor } from '@basementuniverse/color';
 ```
 
+For direct browser usage, load `build/index.js` with a `<script>` tag and use
+the namespaced global:
+
+```html
+<script src="build/index.js"></script>
+<script>
+	const color = BasementUniverseColor.ColorUtils.stringToRGBA('#ff0000');
+</script>
+```
+
+The UMD build supports CommonJS `require()` and bundlers, but native ESM
+imports require a separate ESM build that this package does not currently ship.
+
 ## Exported Types
 
 ```ts
@@ -84,6 +97,7 @@ type RandomGradientOptions = {
 - `fadeOut<T extends RGBAColor | HSLAColor>(color: T, amount = 0.1): T`
 - `invert<T extends RGBAColor | HSLAColor>(color: T): T`
 - `blend<T extends RGBAColor | HSLAColor>(color1: T, color2: T, ratio = 0.5): T`
+- `hue<T extends RGBAColor | HSLAColor>(color: T, amount: number): T`
 
 ## Type Guards
 
